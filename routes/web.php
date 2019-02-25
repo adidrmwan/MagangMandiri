@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('performance','PerformanceController');
 Route::post('import', 'PerformanceController@import')->name('performance.import');
+
