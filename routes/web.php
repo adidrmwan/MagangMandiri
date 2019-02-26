@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('performance','PerformanceController');
+Route::resource('performance-1','PerformanceController');
+Route::resource('performance-2','PerformFebController');
 Route::post('import', 'PerformanceController@import')->name('performance.import');
 

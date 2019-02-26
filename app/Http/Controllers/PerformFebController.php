@@ -9,9 +9,9 @@ use Session;
 use Excel;
 use File;
 use App\Performance;
-use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;;
 
-class PerformanceController extends Controller
+class PerformFebController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +19,9 @@ class PerformanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $listperform = Performance::all();
-        return view('performance.januari.index',compact('listperform'));
+    {
+         $performfeb = Performance::all();
+        return view('performance.februari.index',compact('performfeb'));
     }
 
     /**
@@ -31,7 +31,7 @@ class PerformanceController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -42,7 +42,7 @@ class PerformanceController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
@@ -88,34 +88,5 @@ class PerformanceController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function import (Request $request) {
-        if ($request->hasFile('file')) {
-            $path = $request->file('file')->getRealPath();
-            $data = Excel::load($path, function($reader){})->get();
-
-
-            if (!empty($data) && $data->count()) {
-            
-                foreach ($data as $key => $value) {
-                    $performance = new Performance();
-                    $performance->id_atm = $value->id_atm;
-                    $performance->lokasi = $value->lokasi;
-                    $performance->area = $value->area;
-                    $performance->pengelola = $value->pengelola;
-                    $performance->jenis_lokasi = $value->jenis_lokasi;
-                    $performance->jenis_mesin = $value->jenis_mesin;
-                    $performance->denom = $value->denom;
-                    $performance->item = $value->item;
-                    $performance->volume = $value->volume;
-                    $performance->feebased = $value->feebased;
-                    $performance->kuadran = $value->kuadran;
-                    $performance->save();
-
-                }
-            }
-            return back();
-        }
     }
 }
